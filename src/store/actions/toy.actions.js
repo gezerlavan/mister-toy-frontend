@@ -3,10 +3,10 @@ import { ADD_TOY, REMOVE_TOY, SET_IS_LOADING, SET_TOYS, TOY_UNDO, UPDATE_TOY } f
 import { store } from "../store";
 
 
-export function loadToys() {
+export function loadToys(sortBy) {
     const { filterBy } = store.getState().toyModule
     store.dispatch({ type: SET_IS_LOADING, isLoading: true })
-    return toyService.query(filterBy)
+    return toyService.query(filterBy, sortBy)
         .then(toys => {
             store.dispatch({ type: SET_TOYS, toys })
         })

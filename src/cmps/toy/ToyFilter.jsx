@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react"
 import { utilService } from "../../services/util.service"
+import { ToySort } from "./ToySort"
 
 
-export function ToyFilter({ filterBy, onSetFilter }) {
+export function ToyFilter({ filterBy, onSetFilter, sortBy, setSortBy }) {
     
     const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
 
@@ -27,7 +28,7 @@ export function ToyFilter({ filterBy, onSetFilter }) {
 
     return (
         <section className='toy-filter'>
-            <h3>Toys Filter</h3>
+            <h3>Toys Filter/Sort</h3>
             <form onSubmit={onSubmitFilter}>
                 <div className="filter-input-wrapper">
                     <input
@@ -45,6 +46,7 @@ export function ToyFilter({ filterBy, onSetFilter }) {
                 <option value="true">In Stock</option>
                 <option value="false">Not in stock</option>
             </select>
+            <ToySort sortBy={sortBy} setSortBy={setSortBy} />
             {/* <label >
                 Page: 
                 <input type="number"

@@ -45,7 +45,7 @@ export const toyService = {
     getDefaultSort
 }
 
-function query(filterBy = {}) {
+function query(filterBy = {}, sortBy) {
     return storageService.query(STORAGE_KEY)
         .then(toys => {
             if (filterBy.txt) {
@@ -59,6 +59,7 @@ function query(filterBy = {}) {
                     toys = toys.filter(toy => toy.inStock === true)
                 }
             }
+            toys = getSortedToys(toys, sortBy)
             return toys
         })
 }
@@ -74,6 +75,21 @@ function remove(toyId) {
 function save(toy) {
     const method = toy._id ? 'put' : 'post'
     return storageService[method](STORAGE_KEY, toy)
+}
+
+function getSortedToys(toysToSort, sortBy) {
+    if (sortBy.type === 'name') {
+        toysToSort.sort((b1,b2) => {
+            const title1 = b1.name.toLowerCase()
+            const title2 = b2.name.toLowerCase()
+            return sortBy.desc * title2.localeCompare(title1)
+        })
+    } else {
+        toysToSort.sort(
+            (b1, b2) => sortBy.desc * (b2[sortBy.type] - b1[sortBy.type])
+        )
+    }
+    return toysToSort
 }
 
 function getDefaultFilter() {

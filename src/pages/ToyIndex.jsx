@@ -7,6 +7,8 @@ import { ToyList } from "../cmps/toy/ToyList"
 import { Link } from "react-router-dom"
 import { SET_FILTER_BY } from "../store/reducers/toy.reducer"
 import { ToyFilter } from "../cmps/toy/ToyFilter"
+import { ToySort } from "../cmps/toy/ToySort"
+import { toyService } from "../services/toy.service"
 
 export function ToyIndex() {
 
@@ -14,15 +16,15 @@ export function ToyIndex() {
     const toys = useSelector(storeState => storeState.toyModule.toys)
     const filterBy = useSelector(storeState => storeState.toyModule.filterBy)
     const isLoading = useSelector(storeState => storeState.toyModule.flag.isLoading)
-    // const [sortBy, setSortBy] = useState(toyService.getDefaultSort())
+    const [sortBy, setSortBy] = useState(toyService.getDefaultSort())
     
     useEffect(() => {
-        loadToys()
+        loadToys(sortBy)
             .catch(err => {
                 console.log('err:', err)
                 showErrorMsg('Cannot load toys')
             })
-    }, [filterBy])
+    }, [filterBy, sortBy])
 
     function onRemoveToy(toyId) {
         removeToyOptimistic(toyId)
@@ -43,7 +45,12 @@ export function ToyIndex() {
 
     return (
         <section className='toy-index'>
-            <ToyFilter filterBy={filterBy} onSetFilter={onSetFilter} />
+            <ToyFilter 
+            filterBy={filterBy} 
+            onSetFilter={onSetFilter} 
+            sortBy={sortBy}
+            setSortBy={setSortBy}
+            />
             <button><Link to="/toy/edit">Add Toy</Link></button>
             {!isLoading && <ToyList toys={toys} onRemoveToy={onRemoveToy} />}
         </section>
