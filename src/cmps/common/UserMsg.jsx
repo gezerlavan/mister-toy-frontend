@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from "react"
-import { eventBusService } from "../../services/event-bus.service.js"
-
+import { eventBusService } from "../../services/event-bus.service"
 
 export function UserMsg() {
-    const [msg, setMsg] = useState('')
+
+    const [msg, setMsg] = useState(null)
     const timeoutIdRef = useRef()
 
     useEffect(() => {
         const unsubscribe = eventBusService.on('show-user-msg', (msg) => {
             setMsg(msg)
-            window.scrollTo({ top: 0, behavior: 'smooth' })
+            // window.scrollTo({top: 0, behavior: 'smooth'});
             if (timeoutIdRef.current) {
                 timeoutIdRef.current = null
                 clearTimeout(timeoutIdRef.current)
@@ -20,10 +20,10 @@ export function UserMsg() {
     }, [])
 
     function closeMsg() {
-        setMsg('')
+        setMsg(null)
     }
 
-    if (!msg) return <React.Fragment></React.Fragment>
+    if (!msg) return <span></span>
     return (
         <section className={`user-msg ${msg.type}`}>
             <button onClick={closeMsg}>x</button>
