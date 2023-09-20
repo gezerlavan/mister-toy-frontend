@@ -3,14 +3,12 @@ import { Loader } from "../cmps/common/Loader"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { showErrorMsg } from "../services/event-bus.service"
 import { toyService } from "../services/toy.service"
-import { useSelector } from "react-redux"
 
 export function ToyDetails() {
 
     const [toy, setToy] = useState(null)
     const { toyId } = useParams()
     const navigate = useNavigate()
-    const isLoading = useSelector(storeState => storeState.toyModule.flag.isLoading)
 
     useEffect(() => {
         loadToy()

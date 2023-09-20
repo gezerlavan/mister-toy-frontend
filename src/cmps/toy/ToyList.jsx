@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { ToyPreview } from "./ToyPreview"
 
 
-export function ToyList({ toys, onRemoveTodo }) {
+export function ToyList({ toys, onRemoveToy }) {
     return (
         <section className='toy-list'>
             <ul>
@@ -11,7 +11,7 @@ export function ToyList({ toys, onRemoveTodo }) {
                         <ToyPreview toy={toy} />
                         <div>
                             <button><Link to={`/toy/edit/${toy._id}`}>Edit</Link></button>
-                            <button onClick={() => onRemoveTodo(toy._id)}>Remove</button>
+                            <button onClick={() => onRemoveToy(toy._id)}>Remove</button>
                         </div>
                     </li>
                 )}
