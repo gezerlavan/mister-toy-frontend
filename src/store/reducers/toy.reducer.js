@@ -44,6 +44,9 @@ export function toyReducer(state = initialState, action = {}) {
             toys = [...state.lastToys]
             return { ...state, toys }
 
+        case SET_FILTER_BY:
+            return { ...state, filterBy: { ...action.filterBy } }
+
         case SET_IS_LOADING:
             return { ...state, flag: { ...state.flag, isLoading: action.isLoading } }
 
