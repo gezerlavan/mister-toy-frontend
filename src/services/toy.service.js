@@ -1,6 +1,8 @@
 import { storageService } from "./async-storage.service"
+import { httpService } from "./http.service"
 import { utilService } from "./util.service"
 
+const BASE_URL = 'toy/'
 const STORAGE_KEY = 'toyDB'
 
 const gToys = [
@@ -46,6 +48,11 @@ export const toyService = {
 }
 
 function query(filterBy = {}, sortBy) {
+    return httpService.get(BASE_URL, filterBy)
+        .then((toys) => {
+            toys = getSortedToys(toys, sortBy)
+            return toys
+        })
     return storageService.query(STORAGE_KEY)
         .then(toys => {
             if (filterBy.txt) {
@@ -65,21 +72,28 @@ function query(filterBy = {}, sortBy) {
 }
 
 function getById(toyId) {
+    return httpService.get(BASE_URL + toyId)
     return storageService.get(STORAGE_KEY, toyId)
 }
 
 function remove(toyId) {
+    return httpService.delete(BASE_URL + toyId)
     return storageService.remove(STORAGE_KEY, toyId)
 }
 
 function save(toy) {
+    if(toy._id) {
+        return httpService.put(BASE_URL, toy)
+    } else {
+        return httpService.post(BASE_URL, toy)
+    }
     const method = toy._id ? 'put' : 'post'
     return storageService[method](STORAGE_KEY, toy)
 }
 
 function getSortedToys(toysToSort, sortBy) {
     if (sortBy.type === 'name') {
-        toysToSort.sort((b1,b2) => {
+        toysToSort.sort((b1, b2) => {
             const title1 = b1.name.toLowerCase()
             const title2 = b2.name.toLowerCase()
             return sortBy.desc * title2.localeCompare(title1)
