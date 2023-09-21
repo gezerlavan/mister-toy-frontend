@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { utilService } from "../../services/util.service"
 import { ToySort } from "./ToySort"
+import { isEqual } from "lodash"
 
 
 export function ToyFilter({ filterBy, onSetFilter, sortBy, setSortBy }) {
@@ -10,6 +11,7 @@ export function ToyFilter({ filterBy, onSetFilter, sortBy, setSortBy }) {
     onSetFilter = useRef(utilService.debounce(onSetFilter))
 
     useEffect(() => {
+        if(isEqual(filterByToEdit, filterBy)) return
         onSetFilter.current(filterByToEdit)
     }, [filterByToEdit])
 

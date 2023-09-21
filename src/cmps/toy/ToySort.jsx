@@ -1,3 +1,4 @@
+import { isEqual } from "lodash"
 import { useEffect, useState } from "react"
 
 export function ToySort({ sortBy, setSortBy }) {
@@ -5,7 +6,8 @@ export function ToySort({ sortBy, setSortBy }) {
     const [sortByToEdit, setSortByToEdit] = useState({ ...sortBy })
 
     useEffect(() => {
-        setSortBy(sortByToEdit)
+        if (isEqual(sortByToEdit, sortBy)) return
+            setSortBy(sortByToEdit)
     }, [sortByToEdit])
 
     function handleChange({ target }) {

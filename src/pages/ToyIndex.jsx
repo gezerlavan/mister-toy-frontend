@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Loader } from "../cmps/common/Loader"
-import { loadToys, removeToyOptimistic } from "../store/actions/toy.actions"
+import { loadToys, removeToyOptimistic, setFilter } from "../store/actions/toy.actions"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 import { ToyList } from "../cmps/toy/ToyList"
 import { Link } from "react-router-dom"
@@ -17,7 +17,7 @@ export function ToyIndex() {
     const filterBy = useSelector(storeState => storeState.toyModule.filterBy)
     const isLoading = useSelector(storeState => storeState.toyModule.flag.isLoading)
     const [sortBy, setSortBy] = useState(toyService.getDefaultSort())
-    
+
     useEffect(() => {
         loadToys(sortBy)
             .catch(err => {
@@ -37,19 +37,23 @@ export function ToyIndex() {
             })
     }
 
+    // function onSetFilter(filterBy) {
+    //     dispatch({ type: SET_FILTER_BY, filterBy })
+    // }
+
     function onSetFilter(filterBy) {
-        dispatch({ type: SET_FILTER_BY, filterBy })
+        setFilter(filterBy)
     }
 
-    // if (isLoading) return <Loader />
+    if (isLoading) return <Loader />
 
     return (
         <section className='toy-index'>
-            <ToyFilter 
-            filterBy={filterBy} 
-            onSetFilter={onSetFilter} 
-            sortBy={sortBy}
-            setSortBy={setSortBy}
+            <ToyFilter
+                filterBy={filterBy}
+                onSetFilter={onSetFilter}
+                sortBy={sortBy}
+                setSortBy={setSortBy}
             />
             <button><Link to="/toy/edit">Add Toy</Link></button>
             {!isLoading && <ToyList toys={toys} onRemoveToy={onRemoveToy} />}
