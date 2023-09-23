@@ -14,14 +14,15 @@ export function ToyIndex() {
     const filterBy = useSelector(storeState => storeState.toyModule.filterBy)
     const isLoading = useSelector(storeState => storeState.toyModule.flag.isLoading)
     const [sortBy, setSortBy] = useState(toyService.getDefaultSort())
+    const [pageIdx, setPageIdx] = useState(0)
 
     useEffect(() => {
-        loadToys(sortBy)
+        loadToys(sortBy, pageIdx)
             .catch(err => {
                 console.log('err:', err)
                 showErrorMsg('Cannot load toys')
             })
-    }, [filterBy, sortBy])
+    }, [filterBy, sortBy, pageIdx])
 
     function onRemoveToy(toyId) {
         removeToyOptimistic(toyId)
@@ -47,6 +48,11 @@ export function ToyIndex() {
                 setSortBy={setSortBy}
             />
             <button><Link to="/toy/edit">Add Toy</Link></button>
+            <div className="pagination">
+                <button onClick={() => setPageIdx(pageIdx - 1)} disabled={pageIdx === 0}>Previous</button>
+                {pageIdx + 1}
+                <button onClick={() => setPageIdx(pageIdx + 1)} disabled={toys.length < 5}>Next</button>
+            </div>
             {isLoading && <Loader />}
             {!isLoading && <ToyList toys={toys} onRemoveToy={onRemoveToy} />}
         </section>

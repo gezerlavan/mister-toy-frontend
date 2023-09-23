@@ -64,14 +64,6 @@ export function ToyFilter({ filterBy, onSetFilter, sortBy, setSortBy }) {
                 </select>
             </div>
             <ToySort sortBy={sortBy} setSortBy={setSortBy} />
-            {/* <label >
-                Page: 
-                <input type="number"
-                    name="pageIdx"
-                    value={pageIdx}
-                    onChange={handleChange}
-                />
-            </label> */}
         </section>
     )
 }

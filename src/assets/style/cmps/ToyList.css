@@ -1,11 +1,12 @@
 .toy-list {
-    list-style: none;
     display: flex;
-    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .toy-list ul {
+    list-style: none;
     display: flex;
+    padding: 0;
 }
 
 .toy-list li {
