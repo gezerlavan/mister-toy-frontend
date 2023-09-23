@@ -2,3 +2,11 @@
     padding: 1em;
     font-size: 1.2rem;
 }
+
+.toy-preview .toy-name {
+    font-size: 1.4rem;
+}
+
+.toy-preview img {
+    max-height: 250px;
+}
