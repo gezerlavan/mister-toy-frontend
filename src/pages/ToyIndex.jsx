@@ -5,14 +5,11 @@ import { loadToys, removeToyOptimistic, setFilter } from "../store/actions/toy.a
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 import { ToyList } from "../cmps/toy/ToyList"
 import { Link } from "react-router-dom"
-import { SET_FILTER_BY } from "../store/reducers/toy.reducer"
 import { ToyFilter } from "../cmps/toy/ToyFilter"
-import { ToySort } from "../cmps/toy/ToySort"
 import { toyService } from "../services/toy.service"
 
 export function ToyIndex() {
 
-    const dispatch = useDispatch()
     const toys = useSelector(storeState => storeState.toyModule.toys)
     const filterBy = useSelector(storeState => storeState.toyModule.filterBy)
     const isLoading = useSelector(storeState => storeState.toyModule.flag.isLoading)
@@ -37,15 +34,9 @@ export function ToyIndex() {
             })
     }
 
-    // function onSetFilter(filterBy) {
-    //     dispatch({ type: SET_FILTER_BY, filterBy })
-    // }
-
     function onSetFilter(filterBy) {
         setFilter(filterBy)
     }
-
-    if (isLoading) return <Loader />
 
     return (
         <section className='toy-index'>
@@ -56,6 +47,7 @@ export function ToyIndex() {
                 setSortBy={setSortBy}
             />
             <button><Link to="/toy/edit">Add Toy</Link></button>
+            {isLoading && <Loader />}
             {!isLoading && <ToyList toys={toys} onRemoveToy={onRemoveToy} />}
         </section>
     )

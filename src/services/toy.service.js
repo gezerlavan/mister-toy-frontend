@@ -44,7 +44,8 @@ export const toyService = {
     remove,
     getEmptyToy,
     getDefaultFilter,
-    getDefaultSort
+    getDefaultSort,
+    getToyLabels
 }
 
 function query(filterBy = {}, sortBy) {
@@ -82,7 +83,7 @@ function remove(toyId) {
 }
 
 function save(toy) {
-    if(toy._id) {
+    if (toy._id) {
         return httpService.put(BASE_URL, toy)
     } else {
         return httpService.post(BASE_URL, toy)
@@ -107,7 +108,7 @@ function getSortedToys(toysToSort, sortBy) {
 }
 
 function getDefaultFilter() {
-    return { txt: '', inStock: '' }
+    return { txt: '', inStock: null, labels: [] }
 }
 
 function getDefaultSort() {
@@ -116,13 +117,17 @@ function getDefaultSort() {
 
 function getEmptyToy() {
     return {
-        _id: '',
+        // _id: '',
         name: '',
         price: '',
         labels: [],
         createdAt: Date.now(),
         inStock: true
     }
+}
+
+function getToyLabels() {
+    return [...labels]
 }
 
 function _createToys() {
