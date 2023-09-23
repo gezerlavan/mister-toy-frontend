@@ -38,7 +38,7 @@ export function ToyGoogleMap() {
         // Important! Always set the container height explicitly
         <div style={{ height: '60vh', width: '100%' }} >
             <GoogleMapReact
-                bootstrapURLKeys={{ key: import.meta.env.VITE_API_KEY }}
+                bootstrapURLKeys={{ key: "" }}
                 center={coordinates}
                 zoom={zoom}
                 onClick={handleClick}
