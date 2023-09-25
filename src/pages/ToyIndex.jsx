@@ -48,13 +48,13 @@ export function ToyIndex() {
                 setSortBy={setSortBy}
             />
             <button><Link to="/toy/edit">Add Toy</Link></button>
+            {isLoading && <Loader />}
+            {!isLoading && <ToyList toys={toys} onRemoveToy={onRemoveToy} />}
             <div className="pagination">
                 <button onClick={() => setPageIdx(pageIdx - 1)} disabled={pageIdx === 0}>Previous</button>
                 {pageIdx + 1}
                 <button onClick={() => setPageIdx(pageIdx + 1)} disabled={toys.length < 5}>Next</button>
             </div>
-            {isLoading && <Loader />}
-            {!isLoading && <ToyList toys={toys} onRemoveToy={onRemoveToy} />}
         </section>
     )
 }
