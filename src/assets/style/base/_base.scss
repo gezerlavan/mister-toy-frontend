@@ -3,7 +3,6 @@
 }
 
 html {
-  color: var(--gray3);
   font-family: roboto, sans-serif;
 }
 
@@ -29,8 +28,6 @@ a {
   color: unset;
 }
 
-
-
 /* Dont stretch my Media */
 img,
 embed,
@@ -48,23 +45,17 @@ a.active {
   text-decoration: overline;
 }
 
+button {
+  cursor: pointer;
+  background-color: $clr2bg;
+  margin: 0.5em;
+  border: 0;
+  padding: 0.5em 0.8em;
+  border-radius: 4px;
 
-
-.popup-menu {
-    position: fixed;
-    flex-direction: column;
-    padding: 40px;
-    width: 40vw;
-    align-items: center;
-    height: auto;
-    background-color: rgb(248, 250, 247);
-    border: 1px solid #bebebe;
-    box-shadow: 1px 2px 16px #000000a6;
-    display: flex;
-    inset: 0;
-    margin: auto;
-    height: fit-content;
-}
-.popup-menu h1 {
-    font-size: 1.5em;
+  &:hover {
+    background-color: $clr2;
+    color: white;
+    transition: .3s;
+  }
 }

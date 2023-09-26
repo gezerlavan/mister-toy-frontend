@@ -1,0 +1,18 @@
+.toy-index {
+    display: grid;
+    grid-template-rows: auto auto minmax(460px, 1fr) auto;
+
+    .add-toy {
+        margin-block-start: .5em;
+        text-align: center;
+    }
+
+    .loader-container {
+        align-self: center;
+    }
+
+    .pagination {
+        margin-block-end: .5em;
+        text-align: center;
+    }
+}

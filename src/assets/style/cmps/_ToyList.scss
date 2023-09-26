@@ -1,0 +1,29 @@
+.toy-list {
+    display: flex;
+    justify-content: center;
+
+    ul {
+        list-style: none;
+        display: flex;
+        padding: 0;
+        margin: 0;
+
+        li {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            background-color: $clr1bg;
+            margin: 0.5em;
+
+            .green {
+                color: green;
+            }
+
+            .red {
+                color: red;
+            }
+        }
+    }
+
+
+}

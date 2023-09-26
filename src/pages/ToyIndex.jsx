@@ -47,7 +47,9 @@ export function ToyIndex() {
                 sortBy={sortBy}
                 setSortBy={setSortBy}
             />
-            <button><Link to="/toy/edit">Add Toy</Link></button>
+            <div className="add-toy">
+                <button><Link to="/toy/edit">Add Toy</Link></button>
+            </div>
             {isLoading && <Loader />}
             {!isLoading && <ToyList toys={toys} onRemoveToy={onRemoveToy} />}
             <div className="pagination">
