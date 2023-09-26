@@ -1,4 +1,4 @@
-import heroImgUrl from '../../public/img/HERO_IMG.jpg'
+import heroImgUrl from '../assets/img/HERO_IMG.jpg'
 
 export function HomePage() {
     return (

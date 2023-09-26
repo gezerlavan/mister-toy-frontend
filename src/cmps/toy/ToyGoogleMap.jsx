@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import GoogleMapReact from 'google-map-react'
-import logoUrl from '../../../public/img/toys-favicon.png'
+import logoUrl from '../../assets/img/toys-favicon.png'
 
 const SetBranchLocation = () => (
     <div className="branch-img">
