@@ -1,9 +1,9 @@
 export function AppFooter() {
     return (
-        <section className='app-footer'>
+        <footer className="app-footer">
             <p>
                 Coffeerights to Tal Elias©
             </p>
-        </section>
+        </footer>
     )
 }

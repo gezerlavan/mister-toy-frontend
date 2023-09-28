@@ -1,3 +1,12 @@
+.google-map {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .stores-btns {
+        margin-block-start: 1em;
+    }
+}
+
 .branch-img img {
     width: 40px;
 }

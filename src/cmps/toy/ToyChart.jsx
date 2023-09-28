@@ -1,4 +1,3 @@
-import React from 'react'
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -59,9 +58,9 @@ export function ToyChart() {
         ],
     }
     return (
-        <section className='toy-chart' style={{ maxWidth: '40vw', margin: 'auto' }}>
-            <Doughnut data={data} />
-            <Line data={data} />
+        <section className="toy-chart" style={{ maxWidth: '40vw', margin: 'auto' }}>
+            <Doughnut className="doughnut-chart" data={data} />
+            <Line className="line-chart" data={data} />
         </section>
     )
 }

@@ -34,7 +34,7 @@ export function ToyFilter({ filterBy, onSetFilter, sortBy, setSortBy }) {
     const { txt, inStock, labels, pageIdx } = filterByToEdit
 
     return (
-        <section className='toy-filter'>
+        <section className="toy-filter">
             <h3>Toys Filter/Sort</h3>
             <form onSubmit={onSubmitFilter}>
                 <div className="filter-input-wrapper">

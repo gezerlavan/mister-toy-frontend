@@ -37,7 +37,7 @@ export function ToyGoogleMap() {
 
     return (
         // Important! Always set the container height explicitly
-        <div style={{ height: '60vh', width: '60%' }} >
+        <div className="google-map" style={{ height: '60vh', width: '60vw' }} >
             <GoogleMapReact
                 bootstrapURLKeys={{ key: import.meta.env.VITE_API_KEY }}
                 center={coordinates}
@@ -54,7 +54,7 @@ export function ToyGoogleMap() {
                     {...jerusalem.center}
                 />
             </GoogleMapReact>
-            <section className="stores">
+            <section className="stores-btns">
                 <button onClick={() => { handleClick(haifa.center), setZoom(15) }}>Haifa</button>
                 <button onClick={() => { handleClick(tel_aviv.center), setZoom(15) }}>Tel-Aviv</button>
                 <button onClick={() => { handleClick(jerusalem.center), setZoom(15) }}>Jerusalem</button>

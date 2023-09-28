@@ -40,7 +40,7 @@ export function ToyIndex() {
     }
 
     return (
-        <section className='toy-index'>
+        <section className="toy-index">
             <ToyFilter
                 filterBy={filterBy}
                 onSetFilter={onSetFilter}

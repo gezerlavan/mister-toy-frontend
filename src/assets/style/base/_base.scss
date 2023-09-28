@@ -46,16 +46,5 @@ a.active {
 }
 
 button {
-  cursor: pointer;
-  background-color: $clr2bg;
-  margin: 0.5em;
-  border: 0;
-  padding: 0.5em 0.8em;
-  border-radius: 4px;
-
-  &:hover {
-    background-color: $clr2;
-    color: white;
-    transition: .3s;
-  }
+  @include btn;
 }

@@ -4,8 +4,8 @@ import { ToyPreview } from "./ToyPreview"
 
 export function ToyList({ toys, onRemoveToy }) {
     return (
-        <section className='toy-list'>
-            <ul>
+        <section className="toy-list">
+            <ul className="clean-list">
                 {toys.map(toy =>
                     <li key={toy._id}>
                         <ToyPreview toy={toy} />

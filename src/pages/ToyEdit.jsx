@@ -39,7 +39,7 @@ export function ToyEdit() {
     const { name, price } = toyToEdit
 
     return (
-        <section className='toy-edit'>
+        <section className="toy-edit">
             <h2>{toyToEdit._id ? 'Edit' : 'Add'} Toy</h2>
 
             <form onSubmit={onSaveToy}>

@@ -27,7 +27,7 @@ export function ToyDetails() {
     if (!toy) return <Loader />
 
     return (
-        <section className='toy-details'>
+        <section className="toy-details">
             <h1>Toy name: {toy.name}</h1>
             <h1>Toy price: ${toy.price}</h1>
             <h1>Labels: {toy.labels.join(' ,')}</h1>

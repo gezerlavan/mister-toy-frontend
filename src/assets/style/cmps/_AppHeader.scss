@@ -1,7 +1,8 @@
-.app-header {
-    background-color: $clr1;
-    color: $clr1bg;
+header.app-header {
+    min-width: 350px;
     padding: 1em;
+    color: $clr1bg;
+    background-color: $clr1;
 
     .logo {
         font-family: libre, sans-serif;
