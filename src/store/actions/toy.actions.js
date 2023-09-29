@@ -1,5 +1,14 @@
 import { toyService } from "../../services/toy.service";
-import { ADD_TOY, REMOVE_TOY, SET_FILTER_BY, SET_IS_LOADING, SET_TOYS, TOY_UNDO, UPDATE_TOY } from "../reducers/toy.reducer";
+import {
+    ADD_TOY,
+    ADD_TOY_TO_CART,
+    REMOVE_TOY,
+    SET_FILTER_BY,
+    SET_IS_LOADING,
+    SET_TOYS,
+    TOY_UNDO,
+    UPDATE_TOY
+} from "../reducers/toy.reducer";
 import { store } from "../store";
 
 
@@ -54,5 +63,9 @@ export function saveToy(toy) {
 }
 
 export function setFilter(filterBy = toyService.getDefaultFilter()) {
-    store.dispatch({type: SET_FILTER_BY, filterBy: filterBy})
+    store.dispatch({ type: SET_FILTER_BY, filterBy: filterBy })
+}
+
+export function addToCart(toy) {
+    store.dispatch({ type: ADD_TOY_TO_CART, toy })
 }

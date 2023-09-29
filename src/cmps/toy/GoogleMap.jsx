@@ -7,7 +7,7 @@ const SetBranchLocation = () => (
         <img src={logoUrl} />
     </div>
 )
-export function ToyGoogleMap() {
+export function GoogleMap() {
 
     const [coordinates, setCoordinates] = useState({ lat: 32.0853, lng: 34.7818 })
     const [zoom, setZoom] = useState(8)

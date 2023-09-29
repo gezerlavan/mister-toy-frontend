@@ -1,0 +1,12 @@
+.cart {
+    background-color: $clr1bg;
+    color: $gray3;
+    padding: 20px;
+    position: absolute;
+    top: 5px;
+    right: 50px;
+
+    li button {
+        margin: 5px;
+    }
+}

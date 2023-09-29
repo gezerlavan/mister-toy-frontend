@@ -1,4 +1,9 @@
 header.app-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2em;
+    
     min-width: 350px;
     padding: 1em;
     color: $clr1bg;
@@ -11,5 +16,14 @@ header.app-header {
 
     nav {
         margin-block-end: 1em;
+    }
+
+    .user-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        p {
+            font-size: 1.2rem;
+        }
     }
 }

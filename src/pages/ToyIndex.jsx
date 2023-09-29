@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { Loader } from "../cmps/common/Loader"
-import { loadToys, removeToyOptimistic, setFilter } from "../store/actions/toy.actions"
+import { addToCart, loadToys, removeToyOptimistic, setFilter } from "../store/actions/toy.actions"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 import { ToyList } from "../cmps/toy/ToyList"
 import { Link } from "react-router-dom"
@@ -35,6 +35,12 @@ export function ToyIndex() {
             })
     }
 
+    function onAddToCart(toy) {
+        addToCart(toy)
+        showSuccessMsg(`${toy.name} Added to Cart`)
+
+    }
+
     function onSetFilter(filterBy) {
         setFilter(filterBy)
     }
@@ -51,7 +57,11 @@ export function ToyIndex() {
                 <button><Link to="/toy/edit">Add Toy</Link></button>
             </div>
             {isLoading && <Loader />}
-            {!isLoading && <ToyList toys={toys} onRemoveToy={onRemoveToy} />}
+            {!isLoading && <ToyList
+                toys={toys}
+                onRemoveToy={onRemoveToy}
+                onAddToCart={onAddToCart}
+            />}
             <div className="pagination">
                 <button onClick={() => setPageIdx(pageIdx - 1)} disabled={pageIdx === 0}>Previous</button>
                 {pageIdx + 1}
