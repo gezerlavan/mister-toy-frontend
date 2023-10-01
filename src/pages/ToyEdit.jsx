@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { showErrorMsg } from "../services/event-bus.service"
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 import { toyService } from "../services/toy.service"
+import { saveToy } from "../store/actions/toy.actions"
 
 export function ToyEdit() {
 
@@ -33,7 +34,8 @@ export function ToyEdit() {
     async function onSaveToy(ev) {
         ev.preventDefault()
         try {
-            await toyService.save(toyToEdit)
+            const toyToSave = await saveToy(toyToEdit)
+            showSuccessMsg(`Toy saved (id: ${toyToSave._id})`)
             navigate('/toy')
         } catch (err) {
             console.error('Error while saving toy:', err)

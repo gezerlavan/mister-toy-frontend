@@ -35,9 +35,11 @@ export function toyReducer(state = initialState, action = {}) {
     switch (action.type) {
         // Toys
         case SET_TOYS:
+            lastToys = [...action.toys]
             return { ...state, toys: action.toys, lastToys }
 
         case REMOVE_TOY:
+            lastToys = [...state.toys]
             toys = state.toys.filter(toy => toy._id !== action.toyId)
             return { ...state, toys, lastToys }
 
