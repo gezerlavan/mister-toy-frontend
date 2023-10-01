@@ -1,4 +1,4 @@
-import { Route, HashRouter as Router, Routes } from 'react-router-dom'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import './assets/style/main.scss'
 
@@ -23,12 +23,12 @@ export function App() {
                     <main>
                         <Routes>
                             <Route element={<HomePage />} path="/" />
-                            <Route element={<AboutUs />} path="/about" />
-                            <Route element={<Dashboard />} path="/dashboard" />
-                            <Route element={<ToyIndex />} path="/toy" />
-                            <Route element={<ToyEdit />} path="/toy/edit" />
-                            <Route element={<ToyEdit />} path="/toy/edit/:toyId" />
-                            <Route element={<ToyDetails />} path="/toy/:toyId" />
+                            <Route element={<AboutUs />} path="about" />
+                            <Route element={<Dashboard />} path="dashboard" />
+                            <Route element={<ToyIndex />} path="toy" />
+                            <Route element={<ToyEdit />} path="toy/edit" />
+                            <Route element={<ToyEdit />} path="toy/edit/:toyId" />
+                            <Route element={<ToyDetails />} path="toy/:toyId" />
                         </Routes>
                     </main>
                     <AppFooter />
