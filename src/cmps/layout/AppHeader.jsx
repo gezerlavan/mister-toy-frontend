@@ -13,15 +13,14 @@ export function AppHeader() {
     const isCartShown = useSelector(storeState => storeState.toyModule.isCartShown)
     const user = useSelector(storeState => storeState.userModule.loggedinUser)
 
-    function onLogout() {
-        logout()
-            .then(() => {
-                showSuccessMsg('Logout successfully')
-            })
-            .catch(err => {
-                console.log('err:', err)
-                showErrorMsg('Cannot logout')
-            })
+    async function onLogout() {
+        try {
+            await logout()
+            showSuccessMsg('Logout successfully')
+        } catch (err) {
+            console.log('Error during logout:', err)
+            showErrorMsg('Cannot logout')
+        }
     }
 
     return (

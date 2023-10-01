@@ -48,52 +48,35 @@ export const toyService = {
     getToyLabels
 }
 
-function query(filterBy = {}, sortBy, pageIdx) {
+async function query(filterBy = {}, sortBy, pageIdx) {
     const newFilter = {
         ...filterBy,
+        sortBy,
         pageIdx
     }
-    return httpService.get(BASE_URL, newFilter)
-        .then((toys) => {
-            toys = getSortedToys(toys, sortBy)
-            return toys
-        })
-    return storageService.query(STORAGE_KEY)
-        .then(toys => {
-            if (filterBy.txt) {
-                const regExp = new RegExp(filterBy.txt, 'i')
-                toys = toys.filter(toy => regExp.test(toy.name))
-            }
-            if (filterBy.inStock) {
-                if (filterBy.inStock === 'false') {
-                    toys = toys.filter(toy => toy.inStock === false)
-                } else {
-                    toys = toys.filter(toy => toy.inStock === true)
-                }
-            }
-            toys = getSortedToys(toys, sortBy)
-            return toys
-        })
+    const toys = await httpService.get(BASE_URL, newFilter)
+    // const sortedToys = getSortedToys(toys, sortBy)
+    return toys
 }
 
-function getById(toyId) {
+async function getById(toyId) {
     return httpService.get(BASE_URL + toyId)
     return storageService.get(STORAGE_KEY, toyId)
 }
 
-function remove(toyId) {
+async function remove(toyId) {
     return httpService.delete(BASE_URL + toyId)
     return storageService.remove(STORAGE_KEY, toyId)
 }
 
-function save(toy) {
+async function save(toy) {
+    let savedToy
     if (toy._id) {
-        return httpService.put(BASE_URL, toy)
+        savedToy = await httpService.put(BASE_URL + toy._id, toy)
     } else {
-        return httpService.post(BASE_URL, toy)
+        savedToy = await httpService.post(BASE_URL, toy)
     }
-    const method = toy._id ? 'put' : 'post'
-    return storageService[method](STORAGE_KEY, toy)
+    return savedToy
 }
 
 function getSortedToys(toysToSort, sortBy) {
@@ -121,7 +104,7 @@ function getDefaultFilter() {
 }
 
 function getDefaultSort() {
-    return { type: '', desc: -1 }
+    return { type: '', desc: 1 }
 }
 
 function getEmptyToy() {

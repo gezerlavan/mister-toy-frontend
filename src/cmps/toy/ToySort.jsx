@@ -35,7 +35,7 @@ export function ToySort({ sortBy, setSortBy }) {
                 <input
                     type="checkbox"
                     name="desc"
-                    checked={sortByToEdit.desc > 0}
+                    checked={sortByToEdit.desc < 0}
                     onChange={handleChange}
                 />
                 Descending

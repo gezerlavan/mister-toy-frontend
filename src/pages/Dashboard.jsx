@@ -1,8 +1,8 @@
 import { ToyChart } from "../cmps/toy/ToyChart";
 
-export function ToyDashboard() {
+export function Dashboard() {
     return (
-        <section className="toy-dashboard">
+        <section className="dashboard">
             {/* <div>Hi</div> */}
             <ToyChart />
         </section>

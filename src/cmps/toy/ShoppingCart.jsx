@@ -18,16 +18,15 @@ export function ShoppingCart({ isCartShown, shoppingCart }) {
         return shoppingCart.reduce((acc, toy) => acc + toy.price, 0)
     }
 
-    function onCheckout() {
+    async function onCheckout() {
         const amount = getCartTotal()
-        checkout(-amount)
-            .then(() => {
-                showSuccessMsg(`Charged you: $ ${amount.toLocaleString()}`)
-            })
-            .catch(err=>{
-                console.log('err:', err)
-                showErrorMsg('Cannot checkout')
-            })
+        try {
+            await checkout(-amount)
+            showSuccessMsg(`Charged you: $ ${amount.toLocaleString()}`)
+        } catch (err) {
+            console.log('Error during checkout:', err)
+            showErrorMsg('Cannot checkout')
+        }
     }
 
     if (!isCartShown) return <span></span>

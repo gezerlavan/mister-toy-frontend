@@ -13,6 +13,7 @@ export function ToyIndex() {
     const toys = useSelector(storeState => storeState.toyModule.toys)
     const filterBy = useSelector(storeState => storeState.toyModule.filterBy)
     const isLoading = useSelector(storeState => storeState.toyModule.flag.isLoading)
+    const user = useSelector((storeState) => storeState.userModule.loggedinUser)
     const [sortBy, setSortBy] = useState(toyService.getDefaultSort())
     const [pageIdx, setPageIdx] = useState(0)
 
@@ -24,21 +25,19 @@ export function ToyIndex() {
             })
     }, [filterBy, sortBy, pageIdx])
 
-    function onRemoveToy(toyId) {
-        removeToyOptimistic(toyId)
-            .then(() => {
-                showSuccessMsg('Toy removed')
-            })
-            .catch(err => {
-                console.log('Cannot remove toy', err)
-                showErrorMsg('Cannot remove toy')
-            })
+    async function onRemoveToy(toyId) {
+        try {
+            await removeToyOptimistic(toyId)
+            showSuccessMsg('Toy removed')
+        } catch (err) {
+            console.log('Error while removing toy:', err)
+            showErrorMsg('Cannot remove toy')
+        }
     }
 
     function onAddToCart(toy) {
         addToCart(toy)
         showSuccessMsg(`${toy.name} Added to Cart`)
-
     }
 
     function onSetFilter(filterBy) {
@@ -54,13 +53,14 @@ export function ToyIndex() {
                 setSortBy={setSortBy}
             />
             <div className="add-toy">
-                <button><Link to="/toy/edit">Add Toy</Link></button>
+                <button disabled={!user}><Link to={user ? '/toy/edit' : ''}>Add Toy</Link></button>
             </div>
             {isLoading && <Loader />}
             {!isLoading && <ToyList
                 toys={toys}
                 onRemoveToy={onRemoveToy}
                 onAddToCart={onAddToCart}
+                user={user}
             />}
             <div className="pagination">
                 <button onClick={() => setPageIdx(pageIdx - 1)} disabled={pageIdx === 0}>Previous</button>

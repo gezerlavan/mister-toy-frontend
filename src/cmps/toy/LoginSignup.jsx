@@ -23,25 +23,20 @@ export function LoginSignup() {
         setCredentials(credentials => ({ ...credentials, [field]: value }))
     }
 
-    function onSubmit(ev) {
-        ev.preventDefault()
+    async function onSubmit(ev) {
+        ev.preventDefault();
 
-        if (isSignupState) {
-            signup(credentials)
-                .then((user) => {
-                    showSuccessMsg(`Welcome ${user.fullname}`)
-                })
-                .catch(err => {
-                    showErrorMsg('Cannot signup')
-                })
-        } else {
-            login(credentials)
-                .then((user) => {
-                    showSuccessMsg(`Hi again ${user.fullname}`)
-                })
-                .catch(err => {
-                    showErrorMsg('Cannot login')
-                })
+        try {
+            if (isSignupState) {
+                const user = await signup(credentials)
+                showSuccessMsg(`Welcome ${user.fullname}`)
+            } else {
+                const user = await login(credentials)
+                showSuccessMsg(`Hi again ${user.fullname}`)
+            }
+        } catch (err) {
+            console.error('Error:', err)
+            showErrorMsg(isSignupState ? 'Cannot signup' : 'Cannot login')
         }
     }
 

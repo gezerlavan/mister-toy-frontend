@@ -3,6 +3,8 @@ import { utilService } from "../../services/util.service"
 import { ToySort } from "./ToySort"
 import { isEqual } from "lodash"
 import { toyService } from "../../services/toy.service"
+import { FilterInput } from "./FilterInput"
+import { InStock } from "./InStock"
 
 const toyLabels = toyService.getToyLabels()
 
@@ -45,14 +47,15 @@ export function ToyFilter({ filterBy, onSetFilter, sortBy, setSortBy }) {
                         placeholder="Search"
                         name="txt"
                     />
-                    {/* <div className="fa search"></div> */}
                 </div>
+                {/* <FilterInput handleChange={handleChange} txt={txt} /> */}
             </form>
             <select name="inStock" value={inStock || ''} onChange={handleChange}>
                 <option value="">All</option>
                 <option value="true">In Stock</option>
                 <option value="false">Not in stock</option>
             </select>
+            {/* <InStock inStock={inStock} handleChange={handleChange} /> */}
             <div>
                 <select multiple name="labels" value={labels || []} onChange={handleChange}>
                     <option value="">Labels</option>
