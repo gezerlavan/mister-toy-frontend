@@ -12,6 +12,7 @@ import { ToyIndex } from './pages/ToyIndex'
 import { ToyEdit } from './pages/ToyEdit'
 import { ToyDetails } from './pages/ToyDetails'
 import { Dashboard } from './pages/Dashboard'
+import { AdminIndex } from './pages/AdminIndex'
 
 export function App() {
 
@@ -29,6 +30,7 @@ export function App() {
                             <Route element={<ToyEdit />} path="toy/edit" />
                             <Route element={<ToyEdit />} path="toy/edit/:toyId" />
                             <Route element={<ToyDetails />} path="toy/:toyId" />
+                            <Route element={<AdminIndex />} path="admin" />
                         </Routes>
                     </main>
                     <AppFooter />

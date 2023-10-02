@@ -3,6 +3,7 @@ import { Loader } from "../cmps/common/Loader"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 import { toyService } from "../services/toy.service"
+import { ChatApp } from "../cmps/toy/ChatApp"
 
 export function ToyDetails() {
 
@@ -79,6 +80,7 @@ export function ToyDetails() {
                 <button>Send</button>
             </form>
             <button><Link to="/toy">Back</Link></button>
+            <ChatApp toy={toy} />
         </section>
     )
 }

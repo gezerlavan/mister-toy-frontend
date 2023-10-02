@@ -3,6 +3,7 @@ import {
     ADD_TOY,
     ADD_TOY_TO_CART,
     REMOVE_TOY,
+    REMOVE_TOY_FROM_CART,
     SET_FILTER_BY,
     SET_IS_LOADING,
     SET_TOYS,
@@ -11,6 +12,24 @@ import {
 } from "../reducers/toy.reducer";
 import { store } from "../store";
 
+export function getActionRemoveToy(toyId) {
+    return {
+        type: REMOVE_TOY,
+        toyId
+    }
+}
+export function getActionAddToy(toy) {
+    return {
+        type: ADD_TOY,
+        toy
+    }
+}
+export function getActionUpdateToy(toy) {
+    return {
+        type: UPDATE_TOY,
+        toy
+    }
+}
 
 export async function loadToys(sortBy, pageIdx) {
     const { filterBy } = store.getState().toyModule
@@ -29,7 +48,7 @@ export async function loadToys(sortBy, pageIdx) {
 export async function removeToy(toyId) {
     try {
         await toyService.remove(toyId)
-        store.dispatch({ type: REMOVE_TOY, toyId })
+        store.dispatch(getActionRemoveToy(toyId))
     } catch (err) {
         console.log('toy action -> Cannot remove toy', err)
         throw err
@@ -37,7 +56,7 @@ export async function removeToy(toyId) {
 }
 
 export async function removeToyOptimistic(toyId) {
-    store.dispatch({ type: REMOVE_TOY, toyId })
+    store.dispatch(getActionRemoveToy(toyId))
     try {
         await toyService.remove(toyId)
     } catch (err) {
@@ -51,7 +70,7 @@ export async function saveToy(toy) {
     const type = toy._id ? UPDATE_TOY : ADD_TOY
     try {
         const toyToSave = await toyService.save(toy)
-        store.dispatch({ type, toy: toyToSave })
+        store.dispatch(getActionAddToy(toyToSave))
         return toyToSave
     } catch (err) {
         console.log('toy action -> Cannot save toy', err)
@@ -65,4 +84,8 @@ export function setFilter(filterBy = toyService.getDefaultFilter()) {
 
 export function addToCart(toy) {
     store.dispatch({ type: ADD_TOY_TO_CART, toy })
+}
+
+export function removeFromCart(toyId) {
+    store.dispatch({ type: REMOVE_TOY_FROM_CART, toyId })
 }

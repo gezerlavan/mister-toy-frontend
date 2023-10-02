@@ -31,6 +31,7 @@ export function AppHeader() {
                     <NavLink to="/toy"> Toys</NavLink> |
                     <NavLink to="/dashboard"> Dashboard</NavLink> |
                     <NavLink to="/about"> About</NavLink> |
+                    <NavLink to="/admin"> Admin</NavLink> |
                     <a href="#" onClick={(ev) => {
                         ev.preventDefault()
                         dispatch({ type: SET_CART_IS_SHOWN, isCartShown: !isCartShown })

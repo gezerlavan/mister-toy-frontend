@@ -2,19 +2,11 @@
 import { useState } from 'react'
 import { showErrorMsg, showSuccessMsg } from '../../services/event-bus.service'
 import { login, signup } from '../../store/actions/user.actions'
-
-
-function getEmptyCredentials() {
-    return {
-        fullname: '',
-        username: '',
-        password: '',
-    }
-}
+import { userService } from '../../services/user.service'
 
 export function LoginSignup() {
 
-    const [credentials, setCredentials] = useState(getEmptyCredentials())
+    const [credentials, setCredentials] = useState(userService.getEmptyCredentials())
     const [isSignupState, setIsSignupState] = useState(false)
 
     function handleCredentialsChange(ev) {

@@ -11,14 +11,29 @@ export const userService = {
     logout,
     signup,
     getById,
+    getUsers,
+    remove,
     getLoggedinUser,
-    updateScore
+    updateScore,
+    getEmptyCredentials
 }
 
 window.us = userService
 
-function getById(userId) {
-    return storageService.get(STORAGE_KEY, userId)
+function getUsers() {
+    return httpService.get(`user`)
+    // return storageService.query('user')
+}
+
+async function getById(userId) {
+    const user = await httpService.get(`user/${userId}`)
+    return user
+    // return storageService.get(STORAGE_KEY, userId)
+}
+
+function remove(userId) {
+    return httpService.delete(`user/${userId}`)
+    // return storageService.remove('user', userId)
 }
 
 async function login({ username, password }) {
@@ -46,12 +61,20 @@ async function logout() {
     sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN)
 }
 
+function getEmptyCredentials() {
+    return {
+        fullname: '',
+        username: '',
+        password: '',
+    }
+}
+
 function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN))
 }
 
 function _setLoggedinUser(user) {
-    // const userToSave = { _id: user._id, fullname: user.fullname, score: user.score }
+    user = { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl, score: user.score }
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN, JSON.stringify(user))
     return user
 }
