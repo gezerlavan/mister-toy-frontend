@@ -12,17 +12,13 @@ export function ChatApp({ toy }) {
     const [msg, setMsg] = useState({ txt: '' })
     const [msgs, setMsgs] = useState([])
     const [topic, setTopic] = useState(toy._id)
-    const [isBotMode, setIsBotMode] = useState(false)
 
     const loggedInUser = useSelector(storeState => storeState.userModule.loggedinUser)
-
-    const botTimeoutRef = useRef()
 
     useEffect(() => {
         socketService.on(SOCKET_EVENT_ADD_MSG, addMsg)
         return () => {
             socketService.off(SOCKET_EVENT_ADD_MSG, addMsg)
-            botTimeoutRef.current && clearTimeout(botTimeoutRef.current)
         }
     }, [])
 
@@ -34,22 +30,11 @@ export function ChatApp({ toy }) {
         setMsgs(prevMsgs => [...prevMsgs, newMsg])
     }
 
-    function sendBotResponse() {
-        // Handle case: send single bot response (debounce).
-        botTimeoutRef.current && clearTimeout(botTimeoutRef.current)
-        botTimeoutRef.current = setTimeout(() => {
-            setMsgs(prevMsgs => ([...prevMsgs, { from: 'Bot', txt: 'You are amazing!' }]))
-        }, 1250)
-    }
-
     function sendMsg(ev) {
         ev.preventDefault()
         const from = loggedInUser?.fullname || 'Me'
         const newMsg = { from, txt: msg.txt }
         socketService.emit(SOCKET_EMIT_SEND_MSG, newMsg)
-        if (isBotMode) sendBotResponse()
-        // for now - we add the msg ourself
-        // addMsg(newMsg)
         setMsg({ txt: '' })
     }
 
@@ -57,7 +42,7 @@ export function ChatApp({ toy }) {
         const { name, value } = ev.target
         setMsg(prevMsg => ({ ...prevMsg, [name]: value }))
     }
-
+    
     return (
         <section className="chat">
             <h2>Lets Chat about {toy.name}</h2>
